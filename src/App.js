@@ -18,20 +18,23 @@ class App extends Component {
         'Content-Type':'application/json'
       },
       body: JSON.stringify({username})
+
     }).then(response => {
+
         this.setState({
           currentUsername: response,
           currentScreen: 'ChatScreen'
-        });
+        })
+
     }).catch( err => {
       console.error(err);
-    })
+    });
   }
 
   render() {
-    if(this.state.currentScreen === 'WhatIsYourUsernameScreen' ) {
-          return <UsernameForm onSubmit={this.onUsernameSubmit} />
-    } else {
+    if(this.state.currentScreen === 'WhatIsYourUsernameScreen') {
+      return <UsernameForm onSubmit={this.onUsernameSubmit} />
+    } else if(this.state.currentScreen === 'ChatScreen') {
       return <ChatScreen username={this.state.currentUsername} />
     }
   }
